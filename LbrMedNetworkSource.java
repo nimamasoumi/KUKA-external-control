@@ -65,6 +65,7 @@ public class LbrMedNetworkSource
     private boolean InitilizeExternalControl(NetworkConfig _nc)
     {
         this.logger.append("Initializing the external control.\n");
+        externalController.setLogger(logger);
         if(!externalController.BeginControl(_nc.Hostname))
         {
             this.logger.append("The external control enabling didn't go well");
