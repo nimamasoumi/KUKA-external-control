@@ -9,6 +9,10 @@ public class StateMessage
     private Header header;
 
     private Signals signals;
+
+    private boolean currentAppStartValue;
+
+    private boolean currentAppEnableValue;
     
     private StateMessage(){}
     public StateMessage(StateMessage other)
@@ -22,6 +26,9 @@ public class StateMessage
         this.signals.extAppReadyToStart=other.signals.extAppReadyToStart;
         this.signals.defaultAppError=other.signals.defaultAppError;
         this.signals.stationError=other.signals.stationError;
+
+        this.currentAppStartValue=other.currentAppStartValue;
+        this.currentAppEnableValue=other.currentAppEnableValue;
     }
 
     public class Header
