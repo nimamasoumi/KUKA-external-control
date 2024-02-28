@@ -64,5 +64,15 @@ public class StateMessage
             this.stationError=_stationError;
         }
     }
+
+    public StateMessage Parse(byte[] _data){
+        
+        if(_data==null){
+            throw new NullPointerException("No data to parse!\n");
+        }
+        var response = new StateMessage();
+
+        return response;
+    }
     
 }
