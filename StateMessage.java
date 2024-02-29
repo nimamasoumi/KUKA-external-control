@@ -65,14 +65,37 @@ public class StateMessage
         }
     }
 
-    public StateMessage Parse(byte[] _data){
+    public StateMessage Parse(byte[] _data) throws 
+                                    IllegalArgumentException, ArgumentOutOfRangeException{
         
         if(_data==null){
-            throw new NullPointerException("No data to parse!\n");
+            throw new IllegalArgumentException("No data to parse!\n");
         }
         var response = new StateMessage();
+        var line = new String(_data);
+        String[] stateMessage = line.split(";");
+
+        if(stateMessage.length!=11){
+            throw new ArgumentOutOfRangeException("StateMessage doesn't"+
+             "have all required fields");
+        }
+
+        response.header = new Header(
+            Long.parseLong(stateMessage[0]), 
+            Long.parseLong(stateMessage[1]),
+            Long.parseLong(stateMessage[2]),
+            Long.parseLong(stateMessage[3]));
+
+        response.signals = new Signals(
+            Boolean.parseBoolean(stateMessage[4]), 
+            Boolean.parseBoolean(stateMessage[5]),
+            Boolean.parseBoolean(stateMessage[6]),
+            Boolean.parseBoolean(stateMessage[7]));
+
+        // field 8 should be implemented
+        response.currentAppStartValue = Boolean.parseBoolean(stateMessage[9]);
+        response.currentAppEnableValue = Boolean.parseBoolean(stateMessage[10].trim());
 
         return response;
     }
-    
 }
